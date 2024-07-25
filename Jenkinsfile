@@ -1,15 +1,15 @@
 pipeline {
     agent any
  
-    tools {
-        maven 'Maven - 3.9.0'
+    environment {
+        MAVEN_HOME = tool 'Maven - 3.9.0'
     }
  
     stages {
         stage('Checkout') {
             steps {
                 
-                git url: 'https://github.com/Arsh-Git1/Day11_Jenkins.git', branch: 'main', credentialsId: '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'
+                git url: 'https://github.com/Arsh-Git1/Day_12.git', branch: 'main'
  
                 
             }
