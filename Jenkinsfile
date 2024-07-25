@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    toold {
+    tools {
         maven 'Maven - 3.9.0'
     }
 
