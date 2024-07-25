@@ -1,36 +1,37 @@
 pipeline {
     agent any
- 
+
     environment {
-        MAVEN_HOME = tool 'Maven - 3.9.0'
+        MAVEN_HOME = tool 'Maven - 3.9.0' // Ensure this matches your Maven tool name
     }
- 
+
     stages {
         stage('Checkout') {
             steps {
-                
-                git url: 'https://github.com/Arsh-Git1/Day_12.git', branch: 'main'
- 
-                
+                // Checkout code from GitHub repository
+                git url: 'https://github.com/nkheria/DevOpsClassCodes.git', branch: 'master'
             }
         }
- 
+
         stage('Build') {
             steps {
-    
-                sh 'mvn clean package'
-                
+                // Build the project using Maven
+                script {
+                    withEnv(["PATH+MAVEN=${MAVEN_HOME}\\bin"]) {
+                        sh 'mvn clean package'
+                    }
+                }
             }
         }
- 
+
         stage('Archive Artifacts') {
             steps {
-        
+                // Archive the built artifacts
                 archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
             }
         }
     }
- 
+
     post {
         always {
             echo 'Pipeline finished.'
